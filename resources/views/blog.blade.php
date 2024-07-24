@@ -1,7 +1,7 @@
 @extends('navbar')
 @section('title', 'บทความ')
-
 @section('content')
+    @if (count($blogs)>0)
     <h2 class="text text-center py-2">บทความ</h2>
     <table class="table table-striped text-center">
         <thead>
@@ -42,4 +42,7 @@
         </tbody>
     </table>
     {{$blogs->links()}}
+    @else
+    <h2 class="text text-center py-2">ไม่มีบทความในระบบ</h2>
+    @endif
 @endsection

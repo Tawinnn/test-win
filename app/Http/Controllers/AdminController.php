@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
     function index()
     {
-        $blogs = DB::table('blogs')->paginate(5);
+        $blogs = DB::table('blogs')->paginate(10);
         return view('blog', compact('blogs'));
     }
 
