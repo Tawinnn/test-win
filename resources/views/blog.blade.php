@@ -41,4 +41,5 @@
             @endforeach
         </tbody>
     </table>
+    {{$blogs->links()}}
 @endsection
