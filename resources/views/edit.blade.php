@@ -1,4 +1,4 @@
-@extends('navbar')
+@extends('layouts.navbar')
 @section('title', 'แก้ไขบทความ')
 @section('content')
     <h2 class="text text-center py-2">แก้ไขบทความใหม่</h2>

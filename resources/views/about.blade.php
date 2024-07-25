@@ -1,4 +1,4 @@
-@extends('navbar')
+@extends('layouts.navbar')
 @section('title','เกี่ยวกับเรา')
 
 @section('content')

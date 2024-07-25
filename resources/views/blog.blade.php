@@ -1,4 +1,4 @@
-@extends('navbar')
+@extends('layouts.navbar')
 @section('title', 'บทความ')
 @section('content')
     @if (count($blogs)>0)
