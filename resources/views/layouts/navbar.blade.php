@@ -56,7 +56,7 @@
                                     <a class="dropdown-item" href="{{route('blog')}}">
                                         {{ __('บทความทั้งหมด') }}
                                     </a>
-                                    <a class="dropdown-item" href="/create">
+                                    <a class="dropdown-item" href="/author/create">
                                         {{ __('สร้างบทความใหม่') }}
                                     </a>
                                     <a class="dropdown-item" href="{{route('about')}}">

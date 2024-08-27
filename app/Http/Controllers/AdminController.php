@@ -50,7 +50,7 @@ class AdminController extends Controller
 
         ];
         Blog::insert($data);
-        return redirect('/blog');
+        return redirect('/author/blog');
     }
 
     function delete($id)
@@ -94,6 +94,6 @@ class AdminController extends Controller
 
         ];
         Blog::find($id)->update($data);
-        return redirect('/blog');
+        return redirect('/author/blog');
     }
 }
