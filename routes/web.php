@@ -17,6 +17,7 @@ Route::prefix('author')->group(function(){
     Route::get('/change/{id}',[AdminController::class,'change'])->name('change');
     Route::get('/edit/{id}',[AdminController::class,'edit'])->name('edit');
     Route::post('/update/{id}',[AdminController::class,'update'])->name('update');
+    Route::post('/image/delete/{id}', [AdminController::class, 'deleteImage'])->name('image.delete');
 });
 Auth::routes();
 
