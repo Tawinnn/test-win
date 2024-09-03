@@ -13,11 +13,11 @@ class Blog extends Model
 
     public function images()
     {
-        return $this->hasMany(BlogImage::class, 'blogs_id');
+        return $this->hasMany(BlogsImage::class, 'blogs_id');
     }
 }
 
-class BlogImage extends Model
+class BlogsImage extends Model
 {
     use HasFactory;
 
