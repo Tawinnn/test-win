@@ -116,30 +116,38 @@ class AdminController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate(
-            [
-                'title' => 'required|max:50',
-                'content' => 'required',
-                'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ],
-            [
-                'title.required' => 'กรุณาใส่ชื่อบทความ',
-                'title.max' => 'ชื่อบทความไม่ควรเกิน 50 ตัวอักษร',
-                'content.required' => 'กรุณาใส่เนื้อหาบทความ',
-            ]
-        );
-
-        $blog = Blog::find($id);
-        $blog->update([
-            'title' => $request->title,
-            'content' => $request->content,
+        $request->validate([
+            'title' => 'required|max:50',
+            'content' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // อัปโหลดรูปภาพใหม่
+        // ค้นหา Blog ที่ต้องการอัปเดต
+        $blog = Blog::find($id);
+        $blog->title = $request->title;
+        $blog->content = $request->content;
+        $blog->save();
+
+        // จัดการกับรูปภาพที่ต้องการลบ
+        if ($request->has('delete_images')) {
+            foreach ($request->delete_images as $imageId) {
+                $image = BlogsImage::find($imageId);
+                if ($image) {
+                    // ลบไฟล์จาก storage
+                    if (Storage::disk('public')->exists($image->image)) {
+                        Storage::disk('public')->delete($image->image);
+                    }
+                    // ลบข้อมูลรูปภาพจากฐานข้อมูล
+                    $image->delete();
+                }
+            }
+        }
+
+        // อัปโหลดรูปภาพใหม่ (ถ้ามีการอัปโหลด)
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $path = $image->store('images', 'public');
-                BlogsImage::create([
+                DB::table('blogs_images')->insert([
                     'blogs_id' => $blog->id,
                     'image' => $path,
                 ]);
@@ -148,6 +156,7 @@ class AdminController extends Controller
 
         return redirect('/author/blog');
     }
+
 
     public function deleteImage($id)
     {

@@ -2,8 +2,9 @@
 @section('title', 'แก้ไขบทความ')
 @section('content')
     <h2 class="text text-center py-2">แก้ไขบทความใหม่</h2>
-    <form method="POST" action="{{ route('update', $blog->id) }}">
+    <form method="POST" action="{{ route('update', $blog->id) }}" enctype="multipart/form-data">
         @csrf
+        @method('PUT') <!-- เพิ่ม @method('PUT') -->
         <div class="form-group">
             <label for="">ชื่อบทความ</label>
             <input type="text" name="title" class="form-control" value="{{ $blog->title }}">
@@ -30,11 +31,8 @@
                     <div class="image-preview-wrapper m-2" style="position: relative;">
                         <img src="{{ asset('storage/' . $image->image) }}" class="img-thumbnail"
                             style="width: 150px; height: 150px;">
-                        <form method="POST" action="{{ route('image.delete', $image->id) }}"
+                        <input type="checkbox" name="delete_images[]" value="{{ $image->id }}"
                             style="position: absolute; top: 5px; right: 5px;">
-                            @csrf
-                            <button type="submit" class="btn btn-danger btn-sm">ลบ</button>
-                        </form>
                     </div>
                 @endforeach
             </div>
@@ -71,6 +69,7 @@
                 reader.onload = function(e) {
                     const div = document.createElement('div');
                     div.classList.add('image-preview-wrapper', 'm-2');
+                    div.style.position = 'relative';
 
                     const img = document.createElement('img');
                     img.src = e.target.result;
@@ -78,7 +77,19 @@
                     img.style.width = '150px';
                     img.style.height = '150px';
 
+                    const removeBtn = document.createElement('button');
+                    removeBtn.innerText = 'ลบ';
+                    removeBtn.classList.add('btn', 'btn-danger', 'btn-sm');
+                    removeBtn.style.position = 'absolute';
+                    removeBtn.style.top = '5px';
+                    removeBtn.style.right = '5px';
+                    removeBtn.onclick = function() {
+                        div.remove();
+                        removeImage(index);
+                    };
+
                     div.appendChild(img);
+                    div.appendChild(removeBtn);
                     previewContainer.appendChild(div);
                 };
                 reader.readAsDataURL(file);
