@@ -13,7 +13,7 @@
                 <div class="image-preview-wrapper m-2" style="position: relative;">
                     <a href="javascript:void(0);" onclick="showFullImage('{{ asset('storage/' . $image->image) }}')">
                         <img src="{{ asset('storage/' . $image->image) }}" class="img-thumbnail"
-                            style="width: 150px; height: 150px;">
+                            style="width: 200px; height: 200px;">
                     </a>
                 </div>
             @endforeach

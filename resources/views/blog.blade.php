@@ -7,7 +7,7 @@
         <thead>
             <tr class="table-warning">
                 <th scope="col">ชื่อบทความ</th>
-                {{-- <th scope="col">เนื้อหา</th> --}}
+                <th scope="col">เนื้อหา</th>
                 <th scope="col">สถานะ</th>
                 <th scope="col">แก้ไขบทความ</th>
                 <th scope="col">ลบบทความ</th>
@@ -18,7 +18,7 @@
                 @foreach ($blogs as $item)
             <tr>
                 <th scope="row">{{ $item->title }}</th>
-                {{-- <td>{{Str::limit($item->content,30)}}</td> --}}
+                <td>{{Str::limit($item->content,30)}}</td>
                 <td>
                     @if ($item->status == true)
                         <a href="{{route('change',$item->id)}}" class="btn btn-success">เผยเเพร่</a>

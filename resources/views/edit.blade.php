@@ -31,9 +31,9 @@
                     <div class="image-preview-wrapper m-2" style="position: relative;">
                         <a href="javascript:void(0);" onclick="showFullImage('{{ asset('storage/' . $image->image) }}')">
                             <img src="{{ asset('storage/' . $image->image) }}" class="img-thumbnail"
-                                style="width: 150px; height: 150px;">
+                                style="width: 250px; height: 250px;">
                             <input type="checkbox" name="delete_images[]" value="{{ $image->id }}"
-                                style="position: absolute; top: 5px; right: 5px;">
+                                style="position: absolute; top: 10px; right: 10px;">
                         </a>
                     </div>
                 @endforeach

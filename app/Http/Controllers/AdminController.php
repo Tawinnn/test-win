@@ -20,7 +20,8 @@ class AdminController extends Controller
 
     public function index()
     {
-        $blogs = Blog::paginate(10);
+        // $blogs = Blog::paginate(10);
+        $blogs = Blog::orderBy('created_at', 'desc')->paginate(10);
         return view('blog', compact('blogs'));
     }
 
@@ -42,14 +43,12 @@ class AdminController extends Controller
             [
                 'title' => 'required|max:100',
                 'content' => 'required',
-                'images' => 'required',
                 'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [
                 'title.required' => 'กรุณาใส่ชื่อบทความ',
                 'title.max' => 'ชื่อบทความไม่ควรเกิน 100 ตัวอักษร',
                 'content.required' => 'กรุณาใส่เนื้อหาบทความ',
-                'images.required' => 'กรุณาอัปโหลดรูปภาพ',
             ]
         );
 
