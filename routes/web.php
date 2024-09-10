@@ -2,13 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Blogcontroller;
 
 
+//นักอ่าน
+Route::get('/',[Blogcontroller::class,'index']);
+Route::get('/detail/{id}',[Blogcontroller::class,'detail']);
 
-Route::get('/', function () {
-    return view('main');
-});
 
+//นักเขียน
 Route::prefix('author')->group(function(){
     Route::get('/blog',[AdminController::class,'index'])->name('blog');
     Route::get('/create',[AdminController::class,'create']);

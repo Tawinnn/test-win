@@ -40,14 +40,14 @@ class AdminController extends Controller
     {
         $request->validate(
             [
-                'title' => 'required|max:50',
+                'title' => 'required|max:100',
                 'content' => 'required',
                 'images' => 'required',
                 'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [
                 'title.required' => 'กรุณาใส่ชื่อบทความ',
-                'title.max' => 'ชื่อบทความไม่ควรเกิน 50 ตัวอักษร',
+                'title.max' => 'ชื่อบทความไม่ควรเกิน 100 ตัวอักษร',
                 'content.required' => 'กรุณาใส่เนื้อหาบทความ',
                 'images.required' => 'กรุณาอัปโหลดรูปภาพ',
             ]
@@ -117,7 +117,7 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|max:50',
+            'title' => 'required|max:100',
             'content' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
