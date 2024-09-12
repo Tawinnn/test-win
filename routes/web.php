@@ -10,7 +10,7 @@ Route::get('/',[Blogcontroller::class,'index']);
 Route::get('/detail/{id}',[Blogcontroller::class,'detail']);
 
 
-//นักเขียน1
+//นักเขียน
 Route::prefix('author')->group(function(){
     Route::get('/blog',[AdminController::class,'index'])->name('blog');
     Route::get('/create',[AdminController::class,'create']);
